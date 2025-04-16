@@ -12,7 +12,7 @@ from torch_geometric.nn import conv
 device = torch.device('cuda')
 
 
-class AMNTDDA(nn.Module):
+class GHTMDA(nn.Module):
     def __init__(self, args):
         super(AMNTDDA, self).__init__()
         self.args = args
@@ -104,18 +104,6 @@ class AMNTDDA(nn.Module):
         dr_sim = self.gt_drug(drdr_graph)
         di_sim = self.gt_disease(didi_graph)
 
-        # x = train_data['feature']
-        # adj = train_data['Adj']
-        # x = x.to(device)
-        # adj['edge_index'] = adj['edge_index'].to(device)
-        # adj['data'] = adj['data'].to(device)
-        # H1 = torch.relu(self.gcn_1(x, adj['edge_index'], adj['data'][adj['edge_index'][0], adj['edge_index'][1]]))
-        # H2 = torch.relu(self.gcn_2(H1, adj['edge_index'], adj['data'][adj['edge_index'][0], adj['edge_index'][1]]))
-        # # cnn_embd_hetro = torch.relu(self.gcn_3(H2, adj['edge_index'], adj['data'][adj['edge_index'][0], adj['edge_index'][1]]))
-        # cnn_embd_hetro = self.gcn_3(H2, adj['edge_index'], adj['data'][adj['edge_index'][0], adj['edge_index'][1]])
-
-
-
         cnn_embd_hetro = self.proj(het_mat) if self.proj is not None else het_mat
         gat_embd = self.gat(het_mat, edge_idx)
         embd_mlp = cnn_embd_hetro
@@ -183,38 +171,7 @@ class AMNTDDA(nn.Module):
 
         dr = torch.cat((dr_sim, dr_x), dim=1)
         di = torch.cat((di_sim, di_X), dim=1)
-        # drdi = self.gt_drdi(drdi_graph)
-        # x = drdi
 
-        # drug_feature = self.drug_linear(drug_feature)
-        # protein_feature = self.protein_linear(protein_feature)
-        #
-        # feature_dict = {
-        #     'drug': drug_feature,
-        #     'disease': disease_feature,
-        #     'protein': protein_feature
-        # }
-        #
-        # drdipr_graph.ndata['h'] = feature_dict
-        # g = dgl.to_homogeneous(drdipr_graph, ndata='h')
-        # feature = torch.cat((drug_feature, disease_feature, protein_feature), dim=0)
-        #
-        # for layer in self.hgt:
-        #     hgt_out = layer(g, feature, g.ndata['_TYPE'], g.edata['_TYPE'], presorted=True)
-        #     feature = hgt_out
-        #
-        # dr_hgt = hgt_out[:self.args.drug_number, :]
-        # di_hgt = hgt_out[self.args.drug_number:self.args.disease_number + self.args.drug_number, :]
-        #
-        # dr = torch.stack((dr_sim, dr_hgt), dim=1)
-        # di = torch.stack((di_sim, di_hgt), dim=1)
-        #
-        # dr = self.drug_trans(dr)
-        # di = self.disease_trans(di)
-        #
-        # dr = dr.view(self.args.drug_number, 2 * self.args.gt_out_dim)
-        # di = di.view(self.args.disease_number, 2 * self.args.gt_out_dim)
-        #
 
 
 
