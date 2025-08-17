@@ -16,15 +16,15 @@ A self-supervised heterogeneous graph hierarchical contrastive learning model fo
 
 ## Data:
 The data files needed to run the model, which contain metabolite-disease association datasets.
-adj: Known metabolite-disease associations matrix
-similarityies of disease:
-disease _information_entropy_similarity ：Disease similarity based on information entropy of associated metabolites
-disease_GIP_similarity： Gaussian Interaction Profile (GIP) similarity for diseases
-disease_semantic_similarity：Semantic similarity based on disease ontology and medical knowledge
-similarityies of meatabolite:
-metabolite_entropy_sim: Entropy-based similarity considering metabolite interaction patterns
-metabolite_gip_sim：Chemical structure similarity based on molecular descriptors and fingerprints
-metabolite_structure_sim: Chemical structure similarity based on molecular descriptors and fingerprints
+- adj: Known metabolite-disease associations matrix
+- similarityies of disease:
+- disease _information_entropy_similarity ：Disease similarity based on information entropy of associated metabolites
+- disease_GIP_similarity： Gaussian Interaction Profile (GIP) similarity for diseases
+- disease_semantic_similarity：Semantic similarity based on disease ontology and medical knowledge
+- similarityies of meatabolite:
+- metabolite_entropy_sim: Entropy-based similarity considering metabolite interaction patterns
+- metabolite_gip_sim：Chemical structure similarity based on molecular descriptors and fingerprints
+- metabolite_structure_sim: Chemical structure similarity based on molecular descriptors and fingerprints
 
 ## Code:
 - data_preprocess.py: Methods of data processing and heterogeneous graph construction
